@@ -82,7 +82,9 @@ public class Truss {
 	
     /**
      *  Performance index:
-     *  δ = Sum (􏰥|pi|·li / L), where L characteristic length equal to unity.
+     *  δ = Sum (􏰥|fi|·li / L), where fi the force on each element, li the length of each element, 
+     *  and L the characteristic length of each element equal to unity (assuming all elements 
+     *  have the same characteristic length). 
      */
     public void computePerformance() {
         if (!(F_.getRowDimension()>0)) {
