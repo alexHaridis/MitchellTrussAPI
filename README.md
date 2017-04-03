@@ -1,1 +1,1 @@
-# MitchellTrussAPI
+# Exploring Mitchell Structures
