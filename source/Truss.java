@@ -12,8 +12,8 @@ package mit4s48;
  *  The primary operations are: calculate the performance of the Truss
  *  according to the forces over each of its members. 
  *  
- *  Includes methods for displaying the Geometry and the forces using the 
- *  PApplet object, which is the standard Processing API for graphics.
+ *  Includes methods for displaying Geometry using the PApplet object,
+ *  which is the standard Processing API for graphics.
  *  
  *  @author Alexandros Charidis, Digital Structures, MIT
  *************************************************************************/
@@ -120,7 +120,7 @@ public class Truss {
 	}
     }
 	
-    // draw forces on each element
+    // draw forces as text on each element
     public void drawForces(PApplet p5, int scale) {
         ArrayList<TrussElement> tmp = elements();
 	// int num = tmp.size();
