@@ -18,26 +18,26 @@ import java.util.ArrayList;
 
 public class TrussGraph {
 
-	private ArrayList<Integer>[] adj_; // adjacency list, e.g. adj_[v] = adjacency list for vertex v
-	private final int V_;              // number of nodes (truss joints)
-	private int       E_;              // number of edges (truss members)
+    private ArrayList<Integer>[] adj_; // adjacency list, e.g. adj_[v] = adjacency list for vertex v
+    private final int V_;              // number of nodes (truss joints)
+    private int       E_;              // number of edges (truss members)
     
-	/**
+    /**
      *  Initializes an empty Truss Graph with V nodes.
      *
      *  @throws RuntimeException if V < 0
      */
-	public TrussGraph(int V) {
+    public TrussGraph(int V) {
     	if (V < 0) throw new RuntimeException("Number of nodes must be nonnegative");
     	this.V_ = V;
     	this.E_ = 0;
     	adj_ = (ArrayList<Integer>[]) new ArrayList[V];
     	for (int i=0; i<V; i++) {
-    		adj_[i] = new ArrayList<Integer>();
+    	    adj_[i] = new ArrayList<Integer>();
     	}
     }
 	
-	/**
+    /**
      *  Validate that v is a valid index
      *
      *  @throws IndexOutOfBoundsException unless (0 <= v < V_)
@@ -86,7 +86,6 @@ public class TrussGraph {
     }
     
     /**   Client test and sample execution.  */
-	public static void main(String[] args) {
-	}
+    public static void main(String[] args) {}
 	
 }
