@@ -3,7 +3,7 @@ package mit4s48;
 /*************************************************************************
  *  Compilation:  javac Truss.java
  *  Execution:    java Truss
- *  Dependencies: TrussGraph.java  Jama.Matrix  
+ *  Dependencies: TrussGraph.java  Jama.Matrix  TrussElement.java 
  *                Misc.java  processing.core.PApplet
  *
  *  A Truss structure with N number of nodes or joints and E number of edges 
