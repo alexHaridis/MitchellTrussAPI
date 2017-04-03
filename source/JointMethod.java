@@ -14,67 +14,67 @@ import Jama.*;
 
 public class JointMethod {
 
-	private Matrix F;
-	private Matrix R;
+    private Matrix F;
+    private Matrix R;
 	
-	/**
-	 * 
-	 * @param N = node coordinates:
-	 *        (number of nodes)-by-2 matrix with N(n,0) and N(n,1) the X and
-	 *        Y coordinates of node n
-	 * @param T = truss topology
-	 *        (number of elements)-by-2 matrix with T(e,0) and T(e,1) the indices of
-	 *        the starting and ending nodes of element e
-	 * @param S = support definition
-	 *        (number of fixities)-by-2 matrix with S(s,0) the index of a node and
-	 *        S(s,1) = 1 or 2 depending on whether the fixed DOF is in the X or Y direction
-	 * @param L = load definition
-	 *        (number of loaded nodes)-by-3 matrix with L(n,0) the index of a loaded
-	 *        node and L(n,1) and L(n,2) the loads applied to that node in the X and
-	 *        Y directions
-	 */
-	public JointMethod(Matrix N, Matrix T, Matrix S, Matrix L) {
-		int nNodes    = N.getRowDimension();
-		int nFixities = S.getRowDimension();
-		int nElements = T.getRowDimension();
-		int dofs      = nNodes*2;
-		if (dofs != nElements+nFixities)
-			throw new IllegalArgumentException("The truss is indeterminate");
-        Matrix Q = new Matrix(dofs, 1); // load vector
-        int nLoadedNodes = L.getRowDimension(); // number of loaded nodes
-        for (int i=0; i<nLoadedNodes; i++) {
-        	int n = (int)L.get(i, 0); // node index
-        	double Qx = L.get(i, 1);  // load in x direction
-        	double Qy = L.get(i, 2);  // load in y direction
-        	Q.set(2*n, 0, Qx);
-        	Q.set(2*n+1, 0, Qy);
+    /**
+     * 
+     * @param N = node coordinates:
+     *        (number of nodes)-by-2 matrix with N(n,0) and N(n,1) the X and
+     *        Y coordinates of node n
+     * @param T = truss topology
+     *        (number of elements)-by-2 matrix with T(e,0) and T(e,1) the indices of
+     *        the starting and ending nodes of element e
+     * @param S = support definition
+     *        (number of fixities)-by-2 matrix with S(s,0) the index of a node and
+     *        S(s,1) = 1 or 2 depending on whether the fixed DOF is in the X or Y direction
+     * @param L = load definition
+     *        (number of loaded nodes)-by-3 matrix with L(n,0) the index of a loaded
+     *        node and L(n,1) and L(n,2) the loads applied to that node in the X and
+     *        Y directions
+     */
+    public JointMethod(Matrix N, Matrix T, Matrix S, Matrix L) {
+        int nNodes    = N.getRowDimension();
+	int nFixities = S.getRowDimension();
+	int nElements = T.getRowDimension();
+	int dofs      = nNodes*2;
+	if (dofs != nElements+nFixities)
+	    throw new IllegalArgumentException("The truss is indeterminate");
+	Matrix Q = new Matrix(dofs, 1); // load vector
+	int nLoadedNodes = L.getRowDimension(); // number of loaded nodes
+	for (int i=0; i<nLoadedNodes; i++) {
+	    int n = (int)L.get(i, 0); // node index
+	    double Qx = L.get(i, 1);  // load in x direction
+	    double Qy = L.get(i, 2);  // load in y direction
+	    Q.set(2*n, 0, Qx);
+	    Q.set(2*n+1, 0, Qy);
         }
         
         // initialize the force projection matrix A of size
         // (number of DOFs)-by-(number of DOFs):
         Matrix A = new Matrix(dofs, dofs);
         for (int i=0; i<nElements; i++) {
-        	int n1 = (int)T.get(i, 0);
-        	int n2 = (int)T.get(i, 1);
-        	double n1x = N.get(n1, 0);
-        	double n1y = N.get(n1, 1);
-        	double n2x = N.get(n2, 0);
-        	double n2y = N.get(n2, 1);
-        	double dist = Math.pow(((n2x-n1x)*(n2x-n1x) + (n2y-n1y)*(n2y-n1y)), 0.5);
-        	double cosa = (n2x-n1x)/dist;
-        	double sina = (n2y-n1y)/dist;
-        	A.set(2*n1, i, cosa);
-        	A.set(2*n1+1, i, sina);
-        	A.set(2*n2, i, -cosa);
-        	A.set(2*n2+1, i, -sina);
+            int n1 = (int)T.get(i, 0);
+            int n2 = (int)T.get(i, 1);
+            double n1x = N.get(n1, 0);
+            double n1y = N.get(n1, 1);
+            double n2x = N.get(n2, 0);
+            double n2y = N.get(n2, 1);
+            double dist = Math.pow(((n2x-n1x)*(n2x-n1x) + (n2y-n1y)*(n2y-n1y)), 0.5);
+            double cosa = (n2x-n1x)/dist;
+            double sina = (n2y-n1y)/dist;
+            A.set(2*n1, i, cosa);
+            A.set(2*n1+1, i, sina);
+            A.set(2*n2, i, -cosa);
+            A.set(2*n2+1, i, -sina);
         }
         
         for (int i=0; i<nFixities; i++) {
-        	int n = (int)S.get(i, 0);
-        	if ((int)S.get(i, 1)==1)
-        		A.set(2*n, nElements+i, 1);
-        	else if ((int)S.get(i, 1)==2)
-        		A.set(2*n+1, nElements+i, 1);
+            int n = (int)S.get(i, 0);
+            if ((int)S.get(i, 1)==1)
+                A.set(2*n, nElements+i, 1);
+            else if ((int)S.get(i, 1)==2)
+                A.set(2*n+1, nElements+i, 1);
         }
            
         Matrix result = A.solve(Q.uminus());
@@ -82,36 +82,36 @@ public class JointMethod {
         F = result.getMatrix(0, nElements-1, 0, 0); // element forces
         R = result.getMatrix(nElements, result.getRowDimension()-1, 0, 0); // reaction forces
 	
-	}
+    }
 	
-	public void printMatrix(Matrix m) {
-		for (int i=0; i<m.getRowDimension(); i++) {
-			System.out.print("| ");
-			if (m.getColumnDimension() == 1) {
-				System.out.print(m.get(i, 0));
-			} else {
-				for (int j=0; j<m.getColumnDimension(); j++) {
-					System.out.print(m.get(i, j) + ", ");
-				}	
-			}
-			System.out.print(" |");
-			System.out.println();
-		}
-	}
+    public void printMatrix(Matrix m) {
+        for (int i=0; i<m.getRowDimension(); i++) {
+	    System.out.print("| ");
+	    if (m.getColumnDimension() == 1) {
+	        System.out.print(m.get(i, 0));
+	    } else {
+	        for (int j=0; j<m.getColumnDimension(); j++) {
+		    System.out.print(m.get(i, j) + ", ");
+		}	
+	    }
+	    System.out.print(" |");
+	    System.out.println();
+	} 
+    }
 	
-	/**
-	 * 
-	 * @return F = element forces
-	 *         (number of elements)-by-1 matrix with F(e,1) the force in element e
-	 */
-	public Matrix F() {  return F;  }
+    /**
+     * 
+     * @return F = element forces
+     *         (number of elements)-by-1 matrix with F(e,1) the force in element e
+     */
+    public Matrix F() {  return F;  }
 	
-	/**
-	 * 
-	 * @return R = support reactions
-	 *         (number of fixities)-by-1 matrix with R(f,1) the reaction developed by
-	 *         fixity f
-	 */
-	public Matrix R() {  return R;  }
+    /**
+     * 
+     * @return R = support reactions
+     *         (number of fixities)-by-1 matrix with R(f,1) the reaction developed by
+     *         fixity f
+     */
+    public Matrix R() {  return R;  }
 	
 }
