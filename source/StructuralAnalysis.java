@@ -19,7 +19,9 @@ import Jama.Matrix;
 public class StructuralAnalysis {
 
     /**
-     * 
+     * Implementation of the method of joints. This implementation was initially
+     * done in Matlab by Stavros Tseranidis (MIT, 2015). 
+     *
      * @param N = node coordinates:
      *        (number of nodes)-by-2 matrix with N(n,0) and N(n,1) the X and
      *        Y coordinates of node n
