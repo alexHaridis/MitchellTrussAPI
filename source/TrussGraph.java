@@ -11,7 +11,7 @@
  *  operations are: add directed edge to the truss graph, iterate over
  *  all the nodes adjacent to a given node.
  *  
- *  @author Alexandros Charidis, Digital Structures, MIT
+ *  @author Alexandros Haridis, Digital Structures, MIT
  *************************************************************************/
 
 import java.util.ArrayList;
