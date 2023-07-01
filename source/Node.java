@@ -9,7 +9,7 @@
  *  Includes methods for displaying Geometry using the PApplet object,
  *  which is the standard Processing API for graphics.
  *  
- *  @author Alexandros Charidis, Digital Structures, MIT
+ *  @author Alexandros Haridis, Digital Structures, MIT
  *************************************************************************/
 
 import processing.core.PApplet;
