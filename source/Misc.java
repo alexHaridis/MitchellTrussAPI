@@ -7,7 +7,7 @@
  *  Helper functions primarily for displaying geometry, text, and matrices
  *  in Processing API and Java.
  *  
- *  @author Alexandros Charidis, MIT
+ *  @author Alexandros Haridis, MIT
  *************************************************************************/
 
 import Jama.Matrix;
@@ -75,13 +75,12 @@ public class Misc {
      */
     public static void displayMark(PApplet p5, PFont font, int x, int y, int color) { 
         String string0 = "E x p l o r i n g   M i c h e l l  S t r u c t u r e s";
-	String string1 = "Alexandros Charidis, MIT";
-	String string2 = "charidis@mit.edu";
-	String string3 = "4.s48 Computational Structural Design & Optimization";
-	String string4 = "Spring 2015";
+	String string1 = "Alexandros Haridis, MIT";
+	String string2 = "4.s48 Computational Structural Design & Optimization";
+	String string3 = "Spring 2015";
 
-	String string5 = "Built with Processing";
-	String string6 = "Using: ControlP5 and Jama";
+	String string4 = "Built with Processing";
+	String string5 = "Using: ControlP5 and Jama";
 
 	int off = 20;
 
@@ -90,8 +89,7 @@ public class Misc {
 	displaytext(p5, string2, font, 12, color, 'L', x, y + 2*off);
 	displaytext(p5, string3, font, 10, color, 'L', x, y + 3*off + 10);
 	displaytext(p5, string4, font, 10, color, 'L', x, y + 4*off + 10);
-	displaytext(p5, string5, font, 10, color, 'L', x, y + 6*off + 10);
-	//displaytext(p5, string6, font, 10, color, 'L', x, y + 7*off + 10);
+	//displaytext(p5, string5, font, 10, color, 'L', x, y + 7*off + 10);
     }
 	
 }
