@@ -22,7 +22,7 @@
  *  Processing can be used within the Eclipse IDE by following this tutorial:
  *  https://processing.org/tutorials/eclipse/
  *  
- *  @author Alexandros Charidis, Digital Structures, MIT
+ *  @author Alexandros Haridis, Digital Structures, MIT
  *************************************************************************/
 
 import java.util.ArrayList;
