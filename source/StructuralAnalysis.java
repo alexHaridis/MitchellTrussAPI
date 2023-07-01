@@ -11,7 +11,7 @@
  *     in a simple truss structure. Calculates element forces and reaction
  *     forces. 
  *  
- *  @author Alexandros Charidis, Digital Structures, MIT
+ *  @author Alexandros Haridis, Digital Structures, MIT
  *************************************************************************/
 
 import Jama.Matrix;
